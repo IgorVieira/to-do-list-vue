@@ -6,6 +6,12 @@
                 <li v-for="task in tasks">
                     <span>{{ task.name }} - {{ task.done }} | </span>
                     <i @click="removeTask(task)" class="fa fa-trash"></i>
+                     <router-link :to="{ name: 'info', params: { id : task.id }}">
+                        <button class="btn red" name="profile">
+                            <i class="fa fa-book"></i>
+                            Profile
+                        </button>
+            </router-link>  
                 </li>
             </ul>
             <form @submit.prevent="submitTask()">
@@ -66,7 +72,22 @@ export default {
 
 
 
-    }
+    },
+    created(){
+
+    this.service = new TaskService(this.$resource)
+    
+
+    this.service
+      .listTasks(this.pokemons.length, 9)
+      .then(pokemons => {
+        console.log(pokemons)
+         this.pokemons = pokemons
+      }, err => this.msg = err.message)
+
+    
+
+  },
 
 }
 
