@@ -4,9 +4,9 @@
             <h1>{{ title }}</h1>
             <ul >
                 <li v-for="task in tasks">
-                    <span>{{ task.name }} - {{ task.done }} | </span>
+                    <span>{{ task.activity }} - {{ task.done }} | </span>
                     <i @click="removeTask(task)" class="fa fa-trash"></i>
-                     <router-link :to="{ name: 'info', params: { id : task.id }}">
+                     <router-link :to="{ activity: 'info', params: { id : task._id }}">
                         <button class="btn red" name="profile">
                             <i class="fa fa-book"></i>
                             Profile
@@ -15,7 +15,7 @@
                 </li>
             </ul>
             <form @submit.prevent="submitTask()">
-                <input type="text" v-model="task.name">
+                <input type="text" v-model="task.activity">
                 <input type="checkbox" v-model="task.done">
                 <button class="btn" name="add">Add + </button>
             </form>
@@ -24,29 +24,15 @@
 
 </template>
 <script>
-
-
+import _ from 'lodash';
+import TaskService from '../../domain/task/TaskService'
 
 export default {
 
     data(){
         return{
             title:'Hey!',
-            tasks:[
-                {
-                    name:'Read about Elixir',
-                    done:true
-                },
-                {
-                    name:'Write more about VueJS',
-                    done:true
-                },
-                {
-                    name:'Make a coffee',
-                    done:true
-                }
-
-            ],
+            tasks:[],
             task: {
                 name:'',
                 done:false
@@ -57,13 +43,11 @@ export default {
     methods:{
 
         submitTask(){
-           this.tasks.push(this.task)
-           this.task = {
-                name:'',
-                done:false
-            }
+           this.service = new TaskService(this.$resource)
+           this.service
+                .saveTask(this.task) 
+                .then(res => console.log(res))
         },
-
         removeTask(taskItem){
            const taskRemove = this.tasks.indexOf(taskItem)
            this.tasks.splice(taskRemove,1 )
@@ -77,13 +61,12 @@ export default {
 
     this.service = new TaskService(this.$resource)
     
-
     this.service
-      .listTasks(this.pokemons.length, 9)
-      .then(pokemons => {
-        console.log(pokemons)
-         this.pokemons = pokemons
-      }, err => this.msg = err.message)
+        .listTasks() 
+        .then(tasks => {
+         const item = _.map(tasks, item => item);
+         this.tasks = item;
+      }, err => this.msg = err.message);
 
     
 

@@ -8,7 +8,7 @@ import { routes } from './routes'
 Vue.config.productionTip = false
 Vue.use(VueFire)
 Vue.use(VueResource)
-Vue.http.options.root = 'http://pokeapi.co/api'
+Vue.http.options.root = 'http://localhost:3000/api/tasks'
 
 
 Vue.use(VueRouter)

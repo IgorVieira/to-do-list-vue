@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import Home from './components/home/Home'
+import { routes } from './routes'
 
 export default {
   data(){

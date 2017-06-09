@@ -58,7 +58,7 @@
 import Comment from '../../domain/comment/Comment'
 import Task from  '../../domain/task/Task'
 import PokemonService from '../../domain/task/TaskService'
-import  commentsRef  from '../../domain/firebase/FirebaseService'
+import commentsRef  from '../../domain/firebase/FirebaseService'
 
 
 export default {
@@ -95,9 +95,6 @@ export default {
                     this.msg = err.message
                 })
         }
-    },
-    components:{
-    'board-profile':BoardProfile,
     },
      
 
