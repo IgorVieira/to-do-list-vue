@@ -6,12 +6,12 @@
                 <li v-for="task in tasks">
                     <span>{{ task.activity }} - {{ task.done }} | </span>
                     <i @click="removeTask(task)" class="fa fa-trash"></i>
-                     <router-link :to="{ activity: 'info', params: { id : task._id }}">
+                     <router-link :to="{ name: 'info', params: { id : task._id }}">
                         <button class="btn red" name="profile">
                             <i class="fa fa-book"></i>
                             Profile
                         </button>
-            </router-link>  
+                    </router-link>  
                 </li>
             </ul>
             <form @submit.prevent="submitTask()">
@@ -43,14 +43,26 @@ export default {
     methods:{
 
         submitTask(){
-           this.service = new TaskService(this.$resource)
            this.service
                 .saveTask(this.task) 
-                .then(res => console.log(res))
+                .then(res => {
+                    this.tasks.push(res.body)
+                    this.task = {
+                            name:'',
+                            done:false
+                        }
+                })
         },
         removeTask(taskItem){
-           const taskRemove = this.tasks.indexOf(taskItem)
-           this.tasks.splice(taskRemove,1 )
+            this.service
+                .deleteTask(taskItem._id)
+                .then(() =>{
+                    const taskRemove = this.tasks.indexOf(taskItem)
+                    this.tasks.splice(taskRemove,1 ),
+                    err => console.log(`${err}`)
+                })
+
+          
         }
 
 
@@ -81,10 +93,15 @@ export default {
     color:#ccc;
     background:#1554DB;
     border-radius:6px;
-    width: 4rem;
+    width: 6rem;
     height: 2em;
     padding:1.3em, 1.3rem, 1.3em;
     cursor:pointer;
   }
+
+  .fa.fa-trash:hover{
+      cursor:pointer;
+  }
+
 
 </style>

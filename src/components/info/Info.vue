@@ -1,52 +1,11 @@
 <template>
     <div >
-        <h1>{{title}}</h1>
+        <h1>{{ title }}</h1>
 
          <div class="row">
         
-         
-             <div class="col s12 m6">
-                <div class="card blue-grey darken-1">
-                    <div class="card-content white-text">
-                    <span class="card-title">Comments:</span>
-                    <hr>
-                    <div class="class-container">
-                        <ul v-for="comment in comments">
-                            <li>
-                               <span class="person">{{comment.name}}</span> - <span class="comment">{{comment.comment}}</span> 
-                            <i @click="removeComment(comment)" class="fa fa-trash"></i>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                </div>
-                </div>
-
-
-
-
-                
-              
-                <form @submit.prevent="sendComment()">
-                    <div class="input-field col s12 m12">
-                        <input v-model="newComments.email" placeholder="Email" id="email" type="email" required class="validate">
-                        <label for="email">Email:</label>
-                    </div>
-                    <div class="input-field col s12 m12">
-                        <input v-model="newComments.name" placeholder="Name" id="name" type="text" required class="validate">
-                        <label for="name">Name:</label>
-                    </div>
-                    <textarea name=""  v-model="newComments.comment" id="" cols="30" rows="10"></textarea>
-                    <button class="btn red">
-                       <i class="fa fa-send"></i>
-                        Post
-                    </button>
-                </form>
-            
-            </div>
-            
-        </div>
-           
+         <p>{{task.activity}}</p>
+         <p>{{task.done}}</p>
 
         </div>
 
@@ -57,17 +16,16 @@
 
 import Comment from '../../domain/comment/Comment'
 import Task from  '../../domain/task/Task'
-import PokemonService from '../../domain/task/TaskService'
+import TaskService from '../../domain/task/TaskService'
 import commentsRef  from '../../domain/firebase/FirebaseService'
 
 
 export default {
 
-
- 
     data() {
+
         return {
-            pokemon:new Pokemon(),
+            task: new Task(),
             newComments: new Comment(),
             id: this.$route.params.id,
             msg:'',
@@ -83,14 +41,14 @@ export default {
     },
 
     created() {
-        this.service = new PokemonService(this.$resource);
+        this.service = new TaskService(this.$resource);
 
         if(this.id) {
             this.service
-                .getPokemonById(this.id)
-                .then(pokemon =>  {
-                    console.log(pokemon)
-                    return this.pokemon = pokemon
+                .getTaskById(this.id)
+                .then(res =>  {
+                    console.log(res)
+                    return this.task = res
                 }, err => {
                     this.msg = err.message
                 })
