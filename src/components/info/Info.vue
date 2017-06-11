@@ -8,6 +8,21 @@
          <p>{{task.done}}</p>
 
         </div>
+       <ul v-for="comment in comments">
+            <li>
+                <span class="person">{{comment.activity}}</span> - <span class="comment">{{comment.done}}</span> 
+            <i @click="removeComment(comment)" class="fa fa-trash"></i>
+            </li>
+       </ul>
+
+        <form @submit.prevent="sendComment()">
+            <input v-model="newComments.activity" placeholder="Activity..." id="activity" type="activity" required class="validate">
+            <input v-model="newComments.done" placeholder="Name" id="name" type="checkbox" required class="validate">
+            <button class="btn red">
+                <i class="fa fa-send"></i>
+                Post
+            </button>
+        </form>
 
     </div> 
        
