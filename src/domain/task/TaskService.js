@@ -1,8 +1,6 @@
 
 export default class TaskService{
 
-    baseUrl = '/tasks{/id}'
-
     constructor(resource){
         this._resource = resource('api/tasks{/id}')
     }

@@ -2,7 +2,7 @@
     <div>
         <h3 class="page-header">{{ title }}</h3>
         <div class="col-md-4">
-           <form class="form-horizontal">
+           <form class="form-horizontal well" @submit.prevent="updateTask()" >
                 <div class="form-group">
                     <label for="" >Nome da Atividade:</label>
                     <input type="text" class="form-control" v-model="task.activity">
@@ -11,6 +11,7 @@
                     <label for="" >Status da atividade:</label>
                     <input type="checkbox" v-model="task.done">
                 </div>
+                <input type="submit" value="Salvar" class="btn btn-success">
            </form>
            
         </div>
@@ -23,8 +24,8 @@
                 <h3 class="panel-title">Comentários</h3>
             </div>
             <ul v-for="comment in comments" >
-                <li class="well">
-                    <span class="person">{{comment.activity}}</span> - <span class="comment">{{comment.done}}</span> 
+                <li class="context">
+                    <span class="person">{{comment.comment}}</span> - <span class="comment">{{comment.owner}}</span> 
                     <i @click="removeComment(comment)" class="glyphicon glyphicon-trash" aria-hidden="true"></i>
                 </li>
             </ul>
@@ -90,6 +91,11 @@ export default {
      
 
     methods:{
+        updateTask(){
+             this.service
+             .saveTask(this.task) 
+             .then(res => console.log(res))
+        },
         sendComment(){
             const justComment = commentsRef.ref(`comments/${this.$route.params.id}`)
             justComment.push(this.newComments)
@@ -106,15 +112,8 @@ export default {
 </script>
 <style>
 
-
-.comment{
-    padding: 0.5em 0.5rem 0.5em;
-    background-color:#ccc; 
-}
-
-.person{
-    padding: 0.5em 0.5rem 0.5em;
-    background-color:red; 
+.context{
+    margin-top:10px;
 }
 
 textarea{
