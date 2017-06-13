@@ -1,25 +1,60 @@
 <template>
  
-        <div>
-            <h1>{{ title }}</h1>
-            <ul >
-                <li v-for="task in tasks">
-                    <span>{{ task.activity }} - {{ task.done }} | </span>
-                    <i @click="removeTask(task)" class="fa fa-trash"></i>
-                     <router-link :to="{ name: 'info', params: { id : task._id }}">
-                        <button class="btn red" name="profile">
-                            <i class="fa fa-book"></i>
-                            Profile
-                        </button>
-                    </router-link>  
-                </li>
-            </ul>
-            <form @submit.prevent="submitTask()">
-                <input type="text" v-model="task.activity">
-                <input type="checkbox" v-model="task.done">
-                <button class="btn" name="add">Add + </button>
-            </form>
+        <div class="container">
+            <h3 class="page-header">{{ title }}</h3>
+            <div class="row">
+                <ul >
+                    <li v-for="task in tasks">
 
+
+                        <div class="panel panel-success col-md-4">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">{{ task.activity }}</h3>
+                            </div>
+                            <div class="panel-body">
+                                Status: <div v-if="task.done == true">
+                                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                        </div>
+                                        <div v-else-if="task.done == false">
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        </div>
+                                <hr>
+                                    <router-link :to="{ name: 'info', params: { id : task._id }}">
+                                       <button class="btn">
+                                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                        Editar
+                                       </button>
+                                            
+                                    </router-link> 
+                                    <a @click="removeTask(task)">
+                                        <button class="btn">
+                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                        Remover
+                                       </button>
+                                    </a>
+                            </div>
+                        </div>
+                        
+                    </li>
+                </ul>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-md-5 col-md-offset-2 well">
+                  <form @submit.prevent="submitTask()">
+                    <div class="form-group">
+                        <label for="">Atividade:</label>
+                        <input class="form-control" type="text" v-model="task.activity">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Status:</label>
+                        <input  type="checkbox" v-model="task.done">
+                    </div>
+                   
+                    <button class="btn" name="add">Add + </button>
+                </form>
+              </div>
+            </div>
         </div>
 
 </template>
@@ -31,7 +66,7 @@ export default {
 
     data(){
         return{
-            title:'Hey!',
+            title:'To do Vue!',
             tasks:[],
             task: {
                 name:'',
@@ -89,19 +124,16 @@ export default {
 </script>
 <style>
   
-  .btn{
-    color:#ccc;
-    background:#1554DB;
-    border-radius:6px;
-    width: 6rem;
-    height: 2em;
-    padding:1.3em, 1.3rem, 1.3em;
-    cursor:pointer;
-  }
-
-  .fa.fa-trash:hover{
-      cursor:pointer;
+  .panel.panel-success.col-md-4{
+    margin:20px;
   }
 
 
+  li {
+      list-style-type: none;
+  }
+
+  ul li{
+      margin-left:1em;
+  }
 </style>

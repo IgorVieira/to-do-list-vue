@@ -2,22 +2,22 @@
     <div >
         <h1>{{ title }}</h1>
 
-         <div class="row">
+           <div class="row">
         
-         <p>{{task.activity}}</p>
-         <p>{{task.done}}</p>
+           <p>{{task.activity}}</p>
+           <p>{{task.done}}</p>
 
         </div>
        
 
 
-       <h1>Comentários:</h1>
-       <ul v-for="comment in comments">
+        <h1>Comentários:</h1>
+        <ul v-for="comment in comments">
             <li>
                 <span class="person">{{comment.activity}}</span> - <span class="comment">{{comment.done}}</span> 
             <i @click="removeComment(comment)" class="fa fa-trash"></i>
             </li>
-       </ul>
+        </ul>
         <form @submit.prevent="sendComment()">
             <input v-model="newComments.activity" placeholder="Activity..." id="activity" type="activity" required class="validate">
             <input v-model="newComments.done" placeholder="Name" id="name" type="checkbox" required class="validate">
@@ -52,10 +52,10 @@ export default {
      },
 
       firebase() {
-      return { 
-        comments: commentsRef.ref('comments/' + this.$route.params.id),
-         
-      }
+        return { 
+            comments: commentsRef.ref('comments/' + this.$route.params.id),
+            
+        }
     },
 
     created() {
@@ -74,17 +74,17 @@ export default {
     },
      
 
-     methods:{
-         sendComment(){
+    methods:{
+        sendComment(){
             const justComment = commentsRef.ref(`comments/${this.$route.params.id}`)
             justComment.push(this.newComments)
             this.newComments = new Comment();
-         },
-         removeComment(comment){
+        },
+        removeComment(comment){
            const justComment = commentsRef.ref(`comments/${this.$route.params.id}`)
            justComment.child(comment['.key']).remove()
-         }
-     }
+        }
+    }
 
     
 }
