@@ -1,14 +1,21 @@
 <template>
   <div>
-    <nav>
-    <div>
-      <a href="#">
-         <router-link :to="{ name: 'home'}">
+    <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#"> <router-link :to="{ name: 'home'}">
           <i class="fa fa-home"></i>
           Home
-        </router-link >
-      </a>
-    </div>
+        </router-link ></a>
+      </div>
+      </div>
+     
   </nav>
 
 
@@ -26,13 +33,7 @@
 
 
 
-    <footer>
-      <div>
-        <div>
-        Create by <a  href="https://twitter.com/igorprvieira">Igor Vieira <i class="fa fa-hand-peace-o" aria-hidden="true"></i></a>
-        </div>
-    </div>
-  </footer>
+   
 
 
 

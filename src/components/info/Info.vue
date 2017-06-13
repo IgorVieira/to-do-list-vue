@@ -1,32 +1,47 @@
 <template>
-    <div >
-        <h1>{{ title }}</h1>
-
-           <div class="row">
-        
-           <p>{{task.activity}}</p>
-           <p>{{task.done}}</p>
-
+    <div>
+        <h3 class="page-header">{{ title }}</h3>
+        <div class="col-md-4">
+           <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="" >Nome da Atividade:</label>
+                    <input type="text" class="form-control" v-model="task.activity">
+                </div>
+                <div class="form-group">
+                    <label for="" >Status da atividade:</label>
+                    <input type="checkbox" v-model="task.done">
+                </div>
+           </form>
+           
         </div>
        
 
 
-        <h1>Comentários:</h1>
-        <ul v-for="comment in comments">
-            <li>
-                <span class="person">{{comment.activity}}</span> - <span class="comment">{{comment.done}}</span> 
-            <i @click="removeComment(comment)" class="fa fa-trash"></i>
-            </li>
-        </ul>
-        <form @submit.prevent="sendComment()">
-            <input v-model="newComments.activity" placeholder="Activity..." id="activity" type="activity" required class="validate">
-            <input v-model="newComments.done" placeholder="Name" id="name" type="checkbox" required class="validate">
-            <button class="btn red">
-                <i class="fa fa-send"></i>
-                Post
-            </button>
-        </form>
+        <div class="col-md-4">
+           <div class="panel panel-info">
+             <div class="panel-heading">
+                <h3 class="panel-title">Comentários</h3>
+            </div>
+            <ul v-for="comment in comments" >
+                <li class="well">
+                    <span class="person">{{comment.activity}}</span> - <span class="comment">{{comment.done}}</span> 
+                    <i @click="removeComment(comment)" class="glyphicon glyphicon-trash" aria-hidden="true"></i>
+                </li>
+            </ul>
+           </div>
 
+            <form @submit.prevent="sendComment()" form class="form-horizontal">
+                <input v-model="newComments.comment" placeholder="Atividade..." id="activity" type="text" required  class="form-control">
+                <input v-model="newComments.owner" placeholder="Name..." id="name" type="text" required  class="form-control">
+                <hr>
+                <button class="btn red">
+                    <i class="fa fa-send"></i>
+                    Post
+                </button>
+            </form>
+        </div>
+        
+        </div>
     </div> 
        
 </template>
@@ -47,7 +62,7 @@ export default {
             newComments: new Comment(),
             id: this.$route.params.id,
             msg:'',
-            title:'Profile:'
+            title:'Info:'
         }
      },
 
@@ -113,48 +128,5 @@ textarea{
   color: #000;
 }
 
-.input-field label {
-    color: #000;
-}
-.input-field input[type=text]:focus + label {
-    color: #000;
-}
-.input-field input[type=text]:focus {
-    border-bottom: 1px solid #000;
-    box-shadow: 0 1px 0 0 #000;
-}
-.input-field input[type=text].valid {
-    border-bottom: 1px solid #000;
-    box-shadow: 0 1px 0 0 #000;
-}
-.input-field input[type=text].invalid {
-    border-bottom: 1px solid #000;
-    box-shadow: 0 1px 0 0 #000;
-}
-.input-field .prefix.active {
-    color: #000;
-}
-
-.input-field label {
-    color: #000;
-}
-.input-field input[type=email]:focus + label {
-    color: #000;
-}
-.input-field input[type=email]:focus {
-    border-bottom: 1px solid #000;
-    box-shadow: 0 1px 0 0 #000;
-}
-.input-field input[type=email].valid {
-    border-bottom: 1px solid #000;
-    box-shadow: 0 1px 0 0 #000;
-}
-.input-field input[type=email].invalid {
-    border-bottom: 1px solid #000;
-    box-shadow: 0 1px 0 0 #000;
-}
-.input-field .prefix.active {
-    color: #000;
-}
    
 </style>

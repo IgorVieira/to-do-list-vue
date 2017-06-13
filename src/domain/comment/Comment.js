@@ -1,8 +1,8 @@
 export default class Comment {
 
-    constructor(activity, done) {
-        this.activity = activity
-        this.done = done
+    constructor(comment, owner) {
+        this.comment = comment
+        this.owner = owner
     }
 
 
