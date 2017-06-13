@@ -31,7 +31,7 @@
            </div>
 
             <form @submit.prevent="sendComment()" form class="form-horizontal">
-                <input v-model="newComments.comment" placeholder="Atividade..." id="activity" type="text" required  class="form-control">
+                <input v-model="newComments.comment" placeholder="Comentário..." id="activity" type="text" required  class="form-control">
                 <input v-model="newComments.owner" placeholder="Name..." id="name" type="text" required  class="form-control">
                 <hr>
                 <button class="btn red">
