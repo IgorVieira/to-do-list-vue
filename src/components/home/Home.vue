@@ -109,11 +109,11 @@ export default {
     this.service = new TaskService(this.$resource)
     
     this.service
-        .listTasks() 
-        .then(tasks => {
-         const item = _.map(tasks, item => item);
-         this.tasks = item;
-      }, err => this.msg = err.message);
+    .listTasks() 
+    .then(tasks => {
+        const item = _.map(tasks, item => item);
+        this.tasks = item;
+    }, err => console.log(`Erro na listagem da nossa aplicação ${err}`));
 
     
 
