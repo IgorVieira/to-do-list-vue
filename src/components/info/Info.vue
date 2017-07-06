@@ -93,7 +93,7 @@ export default {
     methods:{
         updateTask(){
              this.service
-             .saveTask(this.task) 
+             .updateTask(this.task) 
              .then(res => console.log(res))
         },
         sendComment(){

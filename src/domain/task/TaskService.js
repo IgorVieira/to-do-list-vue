@@ -6,16 +6,15 @@ export default class TaskService{
     }
 
     saveTask(task){
-        
-        if(task._id){
-            return this._resource.update({ id: task._id }, task)
-        }else{
-             return this._resource.save(task)
-        }
-
+        return this._resource.save(task)
     }
+
+    updateTask(task){
+        return this._resource.update({ id: task._id }, task)
+    }
+
     listTasks() {
-          return this._resource
+        return this._resource
             .query()
             .then(res => res.json())
             
@@ -27,7 +26,6 @@ export default class TaskService{
             .then(res => res.json())
           
     }
-
 
 
     deleteTask(id){
