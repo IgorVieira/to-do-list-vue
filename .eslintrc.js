@@ -29,7 +29,12 @@ module.exports = {
       'js': 'never',
       'vue': 'never'
     }],
-	"no-tabs": 0,
+    "semi": 2,
+    "indent": [2, "tab"],
+    "no-param-reassign": [2, {"props": false}],
+    "no-console":0,
+    "no-tabs":0,
+    "no-underscore-dangle": [2, { "allowAfterThis": false }],
     // allow optionalDependencies
     'import/no-extraneous-dependencies': ['error', {
       'optionalDependencies': ['test/unit/index.js']
