@@ -56,55 +56,54 @@ import commentsRef from '../../domain/firebase/FirebaseService';
 
 export default {
 
-  data() {
-    return {
-      task: new Task(),
-      newComments: new Comment(),
-      id: this.$route.params.id,
-      msg: '',
-      title: 'Info:',
-    };
-  },
+	data() {
+		return {
+			task: new Task(),
+			newComments: new Comment(),
+			id: this.$route.params.id,
+			msg: '',
+			title: 'Info:',
+		};
+	},
 
-  firebase() {
-    return {
-      comments: commentsRef.ref(`comments/${this.$route.params.id}`),
+	firebase() {
+		return {
+			comments: commentsRef.ref(`comments/${this.$route.params.id}`),
 
-    };
-  },
+		};
+	},
 
-  created() {
-    this.service = new TaskService(this.$resource);
+	created() {
+		this.service = new TaskService(this.$resource);
 
-    if (this.id) {
-      this.service
+		if (this.id) {
+			this.service
                 .getTaskById(this.id)
                 .then((res) => {
-                  console.log(res);
-                  return this.task = res;
-                }, (err) => {
-                  this.msg = err.message;
-                });
-    }
-  },
+	this.task = res;
+}, (err) => {
+	this.msg = err.message;
+});
+		}
+	},
 
 
-  methods: {
-    updateTask() {
-      this.service
+	methods: {
+		updateTask() {
+			this.service
              .updateTask(this.task)
              .then(res => console.log(res));
-    },
-    sendComment() {
-      const justComment = commentsRef.ref(`comments/${this.$route.params.id}`);
-      justComment.push(this.newComments);
-      this.newComments = new Comment();
-    },
-    removeComment(comment) {
-      const justComment = commentsRef.ref(`comments/${this.$route.params.id}`);
-      justComment.child(comment['.key']).remove();
-    },
-  },
+		},
+		sendComment() {
+			const justComment = commentsRef.ref(`comments/${this.$route.params.id}`);
+			justComment.push(this.newComments);
+			this.newComments = new Comment();
+		},
+		removeComment(comment) {
+			const justComment = commentsRef.ref(`comments/${this.$route.params.id}`);
+			justComment.child(comment['.key']).remove();
+		},
+	},
 
 
 };

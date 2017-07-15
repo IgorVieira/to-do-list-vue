@@ -44,11 +44,11 @@
 import { routes } from './routes';
 
 export default {
-  data() {
-    return {
-      routes: routes.filter(route => route.menu),
-    };
-  },
+	data() {
+		return {
+			routes: routes.filter(route => route.menu),
+		};
+	},
 };
 </script>
 

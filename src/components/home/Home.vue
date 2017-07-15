@@ -64,52 +64,51 @@ import TaskService from '../../domain/task/TaskService';
 
 export default {
 
-  data() {
-    return {
-      title: 'To do Vue!',
-      tasks: [],
-      task: {
-        name: '',
-        done: false,
-      },
+	data() {
+		return {
+			title: 'To do Vue!',
+			tasks: [],
+			task: {
+				name: '',
+				done: false,
+			},
 
-    };
-  },
-  methods: {
+		};
+	},
+	methods: {
 
-    submitTask() {
-      this.service
+		submitTask() {
+			this.service
                 .saveTask(this.task)
                 .then((res) => {
-                  this.tasks.push(res.body);
-                  this.task = {
-                    name: '',
-                    done: false,
-                  };
-                });
-    },
-    removeTask(taskItem) {
-      this.service
+	this.tasks.push(res.body);
+	this.task = {
+		name: '',
+		done: false,
+	};
+});
+		},
+		removeTask(taskItem) {
+			this.service
                 .deleteTask(taskItem._id)
                 .then(() => {
-                  const taskRemove = this.tasks.indexOf(taskItem);
-                  this.tasks.splice(taskRemove, 1),
-                    err => console.log(`${err}`);
-                });
-    },
+	const taskRemove = this.tasks.indexOf(taskItem);
+	this.tasks.splice(taskRemove, 1);
+}, err => console.log(`${err}`));
+		},
 
 
-  },
-  created() {
-    this.service = new TaskService(this.$resource);
+	},
+	created() {
+		this.service = new TaskService(this.$resource);
 
-    this.service
+		this.service
     .listTasks()
     .then((tasks) => {
-      const item = _.map(tasks, item => item);
-      this.tasks = item;
-    }, err => console.log(`Erro na listagem da nossa aplicação ${err}`));
-  },
+	const item = _.map(tasks, x => x);
+	this.tasks = item;
+}, err => console.log(`Erro na listagem da nossa aplicação ${err}`));
+	},
 
 };
 

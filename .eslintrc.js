@@ -25,6 +25,7 @@ module.exports = {
   // add your custom rules here
   'rules': {
     // don't require .vue extension when importing
+    
     'import/extensions': ['error', 'always', {
       'js': 'never',
       'vue': 'never'
@@ -33,8 +34,16 @@ module.exports = {
     "indent": [2, "tab"],
     "no-param-reassign": [2, {"props": false}],
     "no-console":0,
+    "no-useless-constructor":0,
+    "no-empty-function":0,
     "no-tabs":0,
-    "no-underscore-dangle": [2, { "allowAfterThis": false }],
+    "no-unused-vars":0,
+    "no-unused-expressions":0,
+    "no-prototype-builtins":0,
+    "no-restricted-syntax": 0,
+    "no-underscore-dangle":0,
+    "no-plusplus":0,
+    "radix": 0,
     // allow optionalDependencies
     'import/no-extraneous-dependencies': ['error', {
       'optionalDependencies': ['test/unit/index.js']
